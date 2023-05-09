@@ -104,7 +104,7 @@ t_stack	*ft_max(t_stack **stack)
 
 t_stack	*ft_min(t_stack **stack)
 {
-    t_stack *cur = *stack;
+	t_stack *cur = *stack;
 	t_stack *min = cur;
 
 	while(cur)
@@ -132,21 +132,21 @@ t_stack *ft_check_new_min_max(t_stack *node_a, t_stack **stack_b)
 
 t_stack *find_place(t_stack *src, t_stack **dest)
 { 
-    t_stack *node = ft_check_new_min_max(src, dest);
-    t_stack *cur = *dest;
+	t_stack *node = ft_check_new_min_max(src, dest);
+	t_stack *cur = *dest;
 
-    while(cur)
-    {
-        if(cur->content > src->content)
-            cur = cur->next;
-        else
-        {
-            if(cur->content > node->content)
-                node = cur;
-            cur = cur->next;
-        }   
-    }
-    return(node);
+	while(cur)
+	{
+		if(cur->content > src->content)
+			cur = cur->next;
+		else
+		{
+			if(cur->content > node->content)
+				node = cur;
+			cur = cur->next;
+		}   
+	}
+	return(node);
 }
 
 void print_test_numb(t_stack *node)
