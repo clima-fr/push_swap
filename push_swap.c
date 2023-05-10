@@ -5,20 +5,21 @@ typedef struct stack
 {
   int content;
   struct stack *next;
-  //int distance_top;
+  int mov;
+  unsigned int mov_orientation;
   int index;
 } t_stack;
 
-void printf_list(t_stack **head)
+void print_list(t_stack **head)
 {
     t_stack *cur = *head;
     while(cur != 0)
     {
-        printf("%d\n", cur->content);
+        printf("| Content: %d      Index:%d     Mov:%d      Orient:%d |\n", cur->content, cur->index, cur->mov, cur->mov_orientation);
         cur = cur->next;
     }
     if(cur == 0)
-        printf("( LIST )\n");
+        printf("|-------------------------------------------------|\n");
 }
 
 t_stack	*ft_lstnew(int content)
@@ -104,7 +105,7 @@ t_stack	*ft_max(t_stack **stack)
 
 t_stack	*ft_min(t_stack **stack)
 {
-	t_stack *cur = *stack;
+    t_stack *cur = *stack;
 	t_stack *min = cur;
 
 	while(cur)
@@ -132,29 +133,63 @@ t_stack *ft_check_new_min_max(t_stack *node_a, t_stack **stack_b)
 
 t_stack *find_place(t_stack *src, t_stack **dest)
 { 
-	t_stack *node = ft_check_new_min_max(src, dest);
-	t_stack *cur = *dest;
+    t_stack *node = ft_check_new_min_max(src, dest);
+    t_stack *cur = *dest;
 
-	while(cur)
-	{
-		if(cur->content > src->content)
-			cur = cur->next;
-		else
-		{
-			if(cur->content > node->content)
-				node = cur;
-			cur = cur->next;
-		}   
-	}
-	return(node);
+    while(cur)
+    {
+        if(cur->content > src->content)
+            cur = cur->next;
+        else
+        {
+            if(cur->content > node->content)
+                node = cur;
+            cur = cur->next;
+        }   
+    }
+    return(node);
 }
 
-void print_test_numb(t_stack *node)
+void ft_put_mov_and_orientation(int i, t_stack **stack);
+
+int ft_put_index_and_return_size(t_stack **stack)
 {
-    if(!node)
-        printf("NADA");
-    else
-        printf("%d", (int)node->content);
+    t_stack *cur;
+    cur = *stack;
+    
+    int i;
+    i = 0;
+
+    while(cur)
+    {
+        cur->index = i;
+        cur = cur->next;
+        i++;
+    }
+    cur = *stack;
+    
+    ft_put_mov_and_orientation(i, stack);
+    return(i);
+}
+
+void ft_put_mov_and_orientation(int i, t_stack **stack)
+{
+    t_stack *cur;
+    cur = *stack;
+    while(cur)
+    {
+        if(cur->index <= i/2)
+        {
+            cur->mov = cur->index;
+            cur->mov_orientation = 0;
+        }
+        else
+        {
+            cur->mov = (i - (cur->index));
+            cur->mov_orientation = 1;
+        }
+        cur = cur->next;
+    }
 }
 
 int main(int ac, char** av)
@@ -197,11 +232,20 @@ int main(int ac, char** av)
         head_b = NULL;
         //________FIM STACK B_________________________
 
-        printf("Lista Original A:\n");
-        printf_list(&head_a);
-        printf("Lista Original B:\n");
-        printf_list(&head_b);
+        //printf("Lista Original A:\n");
+        //print_list(head_a);
 
+        int size_list_a = ft_put_index_and_return_size(&head_a);
+        printf("\nO tamanho da Lista A:%d\n", size_list_a);
+        printf("\n|---------------------LIST A----------------------|\n");
+        print_list(&head_a);
+        
+        int size_list_b = ft_put_index_and_return_size(&head_b);
+        printf("\nO tamanho da Lista B:%d\n", size_list_b);
+        printf("\n|---------------------LIST B----------------------|\n");
+        print_list(&head_b);
+        
+        
         pb(&head_b, &head_a);
         pb(&head_b, &head_a);
         sb(&head_b);
@@ -209,12 +253,19 @@ int main(int ac, char** av)
         pb(&head_b, &head_a);
         pb(&head_b, &head_a);
 
-        printf("Lista Atualizada A:\n");
-        printf_list(&head_a);
-        printf("Lista Atualizada B:\n");
-        printf_list(&head_b);
+        size_list_a = ft_put_index_and_return_size(&head_a);
+        printf("\nO tamanho da Lista A:%d\n", size_list_a);
+        printf("\n|---------------------LIST A----------------------\n");
+        print_list(&head_a);
         
-        printf("Lugar de A em B:\n");
-        print_test_numb(find_place(head_a, &head_b));
+        size_list_b = ft_put_index_and_return_size(&head_b);
+        printf("\nO tamanho da Lista B:%d\n", size_list_b);
+        printf("\n|---------------------LIST B----------------------|\n");
+        print_list(&head_b);
+        
+        t_stack *place = find_place(head_a, &head_b);
+        printf("Lugar de A em B esta acima do: %d\n", place->content);
+
+        //TESTE COM AS ENTRADAS: 5 2 7 1 6 3 9 4 8
     }
 }
