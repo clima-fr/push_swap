@@ -746,4 +746,12 @@ int main(int ac, char **av)
 
 //teste com : 2 7 15 3 8 9 10 100 37 28 42 32 6 1 29 30 55 80
 
-//proximo passo: corrigir o SPLIT, que esta com problemas quando passado apenas um arguento com espacos
+//Essa semana:
+// -> Organizar saidas de texto padrao a partir dos movimentos
+// -> Criar funcao free para listas
+// -> Criar Checker
+// -> AJustar o Split (com problemas quando passado apenas um arguento com espacos)
+// -> Separar em arquivos 
+// -> Construir Header
+// -> Construir Makefile
+// -> Passar Norminette
