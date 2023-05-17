@@ -241,6 +241,20 @@ void    ft_create_node(t_stack **head, char *str)
     int numb = ft_atoi(str);
     ft_lstadd_back(head, ft_lstnew(numb));
 }
+void	ft_freelst(t_stack **stack)
+{
+	t_stack	*cur;
+
+	if (!stack)
+		return ;
+	while (*stack)
+	{
+		cur = (*stack)->next;
+		(*stack)->content = 0;
+		free(*stack);
+		*stack = cur;
+	}
+}
 void	ft_freesplit(char **str)
 {
 	char	*s1;
@@ -263,6 +277,12 @@ t_stack *ft_check_arg_and_create_stack_a(int ac, char **av)
     if(ac == 2)
     {
         char **split = ft_split(av[1], 32);
+		if(*split == NULL || split == NULL)
+		{	
+			ft_freesplit(split);
+        	free(split);
+			ft_error();
+		}
         int i = 0;
         while(split[i])
         {
@@ -301,62 +321,6 @@ int		ft_check_doubles(t_stack **stack_a)
     }
     return(0);
 }
-t_stack	*ft_min(t_stack **stack);
-/*int ft_check_sorted2(t_stack **stack)
-{
-
-	t_stack *min = ft_min(stack);
-	t_stack *cmp = *stack;
-	
-
-	while(cmp->content != min->content)
-	{
-		cmp = cmp->next;
-	}
-	
-	t_stack *i = cmp->next;
-	
-	while(cmp && i)
-    {
-		while(i)
-       	{
-           	if(cmp->content > i->content)
-               	return(0);
-           	i = i->next;
-       	}
-        cmp = cmp->next;
-        i = cmp->next;
-    }
-	
-	cmp = *stack;
-	i = cmp->next;
-
-	while(cmp->content != min->content)
-    {
-		while(i->content != min->content)
-       	{
-           	if(cmp->content > i->content)
-               	return(0);
-           	i = i->next;
-       	}
-        cmp = cmp->next;
-        i = cmp->next;
-    }
-    return(1);
-	
-    while(cmp && i)
-    {
-		while(i)
-       	{
-           	if(cmp->content > i->content)
-               	return(0);
-           	i = i->next;
-       	}
-        cmp = cmp->next;
-        i = cmp->next;
-    }
-    return(1);
-}*/
 int ft_check_sorted(t_stack **stack)
 {
     
@@ -554,7 +518,7 @@ t_stack *ft_return_dest_place(t_stack *src, t_stack **dest)
 void	ft_find_place_n_def_total_mov(t_stack **src, t_stack **dest)
 { 
     t_stack	*cur_src = *src;
-	t_stack *place;
+	t_stack *place;// = ft_check_new_min_max(cur_src, dest);
     t_stack *cur_dest = *dest;
 
 	while(cur_src)
@@ -623,7 +587,6 @@ void ft_put_mov_and_orientation(int size, t_stack **stack)
         }
         cur = cur->next;
     }
-	
 }
 void    ft_put_total_mov(t_stack *src, t_stack *dest)
 {
@@ -648,8 +611,8 @@ t_stack *ft_find_best_case(t_stack **src)
     {
         if(cur->total_mov < less_mov)
         {
+			best_case = cur;
             less_mov = cur->total_mov;
-            best_case = cur;
         }
         cur = cur->next;
     }
@@ -747,7 +710,7 @@ void	ft_rotate_to_finish(t_stack **stack_a, t_stack **stack_b)
 	node_to_mov = ft_min(stack_a);
 	
 	ft_put_index_n_def_mov_n_orient(stack_a, stack_b);
-	if(node_to_mov->index != 0)
+	if(node_to_mov->index > 0)
 		ft_move_node_to_top_a(node_to_mov, stack_a);
 }
 void	ft_back_to_a(t_stack **stack_a, t_stack **stack_b)
@@ -808,10 +771,6 @@ void	ft_big_sort(t_stack **stack_a, t_stack **stack_b)
 	pb(stack_b, stack_a);
 	int size = ft_put_index_n_def_mov_n_orient(stack_a, stack_b);
 	ft_find_place_n_def_total_mov(stack_a, stack_b);
-	/*printf("\n|----------------------------LIST A-----------------------------|\n");
-	print_list(stack_a);
-	printf("\n|----------------------------LIST B-----------------------------|\n");
-	print_list(stack_b);*/
 	while(size > 3 && ft_check_sorted(stack_a) == 0)
 	{
 		node_src = ft_find_best_case(stack_a);
@@ -825,10 +784,7 @@ void	ft_big_sort(t_stack **stack_a, t_stack **stack_b)
 		pb(stack_b, stack_a);
 		size = ft_put_index_n_def_mov_n_orient(stack_a, stack_b);
 		ft_find_place_n_def_total_mov(stack_a, stack_b);
-		/*printf("\n|----------------------------LIST A-----------------------------|\n");
-    	print_list(stack_a);
-		printf("\n|----------------------------LIST B-----------------------------|\n");
-    	print_list(stack_b);*/
+
 	}
 }
 void	ft_sort_cases(t_stack **stack_a)
@@ -850,10 +806,6 @@ void	ft_sort_cases(t_stack **stack_a)
 		if(stack_b)
 			ft_back_to_a(stack_a, &stack_b);
 	}
-	/*printf("\n|----------------------------LIST A-----------------------------|\n");
-    print_list(stack_a);
-	printf("\n|----------------------------LIST B-----------------------------|\n");
-    print_list(&stack_b);*/
 }
 int main(int ac, char **av)
 {
@@ -865,24 +817,24 @@ int main(int ac, char **av)
         t_stack *head_a;
 
 		head_a = ft_check_arg_and_create_stack_a(ac,av);
-		if(ft_check_doubles(&head_a) == 1)
+		if(!head_a || ft_check_doubles(&head_a) == 1)
+		{
+			ft_freelst(&head_a);
 			ft_error();
+		}
 		if(!ft_check_sorted(&head_a))
 		{
-			/*printf("\n|----------------------------LIST A-----------------------------|\n");
-        	print_list(&head_a);*/
 			ft_sort_cases(&head_a);
 		}
+		ft_freelst(&head_a);
 	}
 
 }
 
 //teste com : 2 7 15 3 8 9 10 100 37 28 42 32 6 1 29 30 55 80
 
-//Para dia 18/05/23:
-
-// -> Criar funcao free para listas
-// -> Ajustar o Split (com problemas quando passado apenas um argumento com espacos)
+//Para dia 17/05/23:
+// -> Criar Checker
 // -> Separar em arquivos 
 // -> Construir Header
 // -> Construir Makefile
