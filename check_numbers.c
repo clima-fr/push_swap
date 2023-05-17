@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   check_numbers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivbatist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: clima-fr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 19:17:39 by ivbatist          #+#    #+#             */
-/*   Updated: 2023/05/17 19:37:30 by ivbatist         ###   ########.fr       */
+/*   Created: 2023/05/17 22:45:05 by clima-fr          #+#    #+#             */
+/*   Updated: 2023/05/17 22:45:15 by clima-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_stack	*ft_max(t_stack **stack)

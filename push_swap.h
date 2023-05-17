@@ -25,8 +25,6 @@ typedef struct stack
 	int				index;
 }			t_stack;
 //////////////////////////////////////////////////FT GERAIS
-static int	count_words(char const *str, char c);
-static int	count_letters(char const *str, char c, int i);
 void		ft_error(void);
 int			ft_isdigit(int c);
 //////////////////////////////////////////////////FT GERAIS LISTA
