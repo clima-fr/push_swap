@@ -29,7 +29,7 @@ t_stack	*ft_arg_to_split(char **split)
 	{	
 		ft_freesplit(split);
 		free(split);
-		ft_error();
+		exit (0);
 	}
 	i = 0;
 	while (split[i])
