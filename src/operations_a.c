@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_b.c                                     :+:      :+:    :+:   */
+/*   operations_a.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clima-fr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 18:49:40 by clima-fr          #+#    #+#             */
-/*   Updated: 2023/05/17 18:49:42 by clima-fr         ###   ########.fr       */
+/*   Created: 2023/05/17 22:48:20 by clima-fr          #+#    #+#             */
+/*   Updated: 2023/05/17 22:48:24 by clima-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
-void	sb(t_stack **b)
+void	sa(t_stack **a)
 {
-	swap(&(*b));
-	write(1, "sb\n", 3);
+	swap(&(*a));
+	write(1, "sa\n", 3);
 }
 
-void	rb(t_stack **b)
+void	ra(t_stack **a)
 {
-	rotate(&(*b));
-	write(1, "rb\n", 3);
+	rotate(&(*a));
+	write(1, "ra\n", 3);
 }
 
-void	rrb(t_stack **b)
+void	rra(t_stack **a)
 {
-	reverse_rotate(&(*b));
-	write(1, "rrb\n", 4);
+	reverse_rotate(&(*a));
+	write(1, "rra\n", 4);
 }
 
-void	pb(t_stack **b, t_stack **a)
+void	pa(t_stack **a, t_stack **b)
 {
-	push(&(*b), &(*a));
-	write(1, "pb\n", 3);
+	push(&(*a), &(*b));
+	write(1, "pa\n", 3);
 }

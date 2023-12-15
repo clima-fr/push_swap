@@ -9,7 +9,7 @@
 /*   Updated: 2023/05/17 22:47:36 by clima-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void	swap(t_stack **stack)
 {

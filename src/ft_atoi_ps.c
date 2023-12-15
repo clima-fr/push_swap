@@ -9,7 +9,7 @@
 /*   Updated: 2023/05/17 22:47:18 by clima-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 #include<stdio.h>
 
 int	ft_isdigit(int c)

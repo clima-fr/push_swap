@@ -9,7 +9,7 @@
 /*   Updated: 2023/05/17 22:47:53 by clima-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 static int	count_words(char const *str, char c)
 {

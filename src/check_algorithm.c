@@ -9,7 +9,7 @@
 /*   Updated: 2023/05/17 22:51:15 by clima-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void	ft_find_place_n_def_total_mov(t_stack **src, t_stack **dest)
 {

@@ -1,33 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_ab.c                                    :+:      :+:    :+:   */
+/*   utilities_return.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clima-fr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 22:48:06 by clima-fr          #+#    #+#             */
-/*   Updated: 2023/05/17 22:48:12 by clima-fr         ###   ########.fr       */
+/*   Created: 2023/05/17 22:50:14 by clima-fr          #+#    #+#             */
+/*   Updated: 2023/05/17 22:50:19 by clima-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
-void	ss(t_stack **a, t_stack **b)
+void	ft_error(void)
 {
-	swap(&(*a));
-	swap(&(*b));
-	write(1, "ss\n", 3);
+	write(2, "Error\n", 6);
+	exit(1);
 }
 
-void	rr(t_stack **a, t_stack **b)
+void	ft_freelst(t_stack **stack)
 {
-	rotate(&(*a));
-	rotate(&(*b));
-	write(1, "rr\n", 3);
+	t_stack	*cur;
+
+	if (!stack)
+		return ;
+	while (*stack)
+	{
+		cur = (*stack)->next;
+		(*stack)->content = 0;
+		free(*stack);
+		*stack = cur;
+	}
 }
 
-void	rrr(t_stack **a, t_stack **b)
+void	ft_freesplit(char **str)
 {
-	reverse_rotate(&(*a));
-	reverse_rotate(&(*b));
-	write(1, "rrr\n", 4);
+	char	*s1;
+
+	if (!str)
+		return ;
+	while (*str)
+	{
+		s1 = *str;
+		str++;
+		free(s1);
+	}
+	*str = NULL;
 }

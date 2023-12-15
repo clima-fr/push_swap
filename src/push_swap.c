@@ -1,48 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilities_return.c                                 :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clima-fr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 22:50:14 by clima-fr          #+#    #+#             */
-/*   Updated: 2023/05/17 22:50:19 by clima-fr         ###   ########.fr       */
+/*   Created: 2023/05/17 22:48:57 by clima-fr          #+#    #+#             */
+/*   Updated: 2023/05/17 22:49:01 by clima-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
-void	ft_error(void)
+int	main(int ac, char **av)
 {
-	write(2, "Error\n", 6);
-	exit(1);
-}
+	t_stack	*head_a;
 
-void	ft_freelst(t_stack **stack)
-{
-	t_stack	*cur;
-
-	if (!stack)
-		return ;
-	while (*stack)
+	if (ac < 2)
+		return (0);
+	else
 	{
-		cur = (*stack)->next;
-		(*stack)->content = 0;
-		free(*stack);
-		*stack = cur;
+		head_a = ft_check_arg_and_create_stack_a(ac, av);
+		if (!head_a || ft_check_doubles(&head_a) == 1)
+		{
+			ft_freelst(&head_a);
+			ft_error();
+		}
+		if (!ft_check_sorted(&head_a))
+		{
+			ft_sort_cases(&head_a);
+		}
+		ft_freelst(&head_a);
 	}
-}
-
-void	ft_freesplit(char **str)
-{
-	char	*s1;
-
-	if (!str)
-		return ;
-	while (*str)
-	{
-		s1 = *str;
-		str++;
-		free(s1);
-	}
-	*str = NULL;
 }

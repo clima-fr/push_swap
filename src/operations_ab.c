@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   operations_ab.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clima-fr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 22:48:57 by clima-fr          #+#    #+#             */
-/*   Updated: 2023/05/17 22:49:01 by clima-fr         ###   ########.fr       */
+/*   Created: 2023/05/17 22:48:06 by clima-fr          #+#    #+#             */
+/*   Updated: 2023/05/17 22:48:12 by clima-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
-int	main(int ac, char **av)
+void	ss(t_stack **a, t_stack **b)
 {
-	t_stack	*head_a;
+	swap(&(*a));
+	swap(&(*b));
+	write(1, "ss\n", 3);
+}
 
-	if (ac < 2)
-		return (0);
-	else
-	{
-		head_a = ft_check_arg_and_create_stack_a(ac, av);
-		if (!head_a || ft_check_doubles(&head_a) == 1)
-		{
-			ft_freelst(&head_a);
-			ft_error();
-		}
-		if (!ft_check_sorted(&head_a))
-		{
-			ft_sort_cases(&head_a);
-		}
-		ft_freelst(&head_a);
-	}
+void	rr(t_stack **a, t_stack **b)
+{
+	rotate(&(*a));
+	rotate(&(*b));
+	write(1, "rr\n", 3);
+}
+
+void	rrr(t_stack **a, t_stack **b)
+{
+	reverse_rotate(&(*a));
+	reverse_rotate(&(*b));
+	write(1, "rrr\n", 4);
 }

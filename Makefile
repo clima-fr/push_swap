@@ -12,7 +12,10 @@
 
 NAME = push_swap
 HDRS = push_swap.h
-SRC = check_algorithm.c check_numbers.c ft_atoi_ps.c ft_split_functions.c general_operations.c operations_a.c operations_b.c operations_ab.c outward_algorithm.c push_swap.c return_algorithm.c sort_algorithm.c utilities_check_main.c utilities_list.c utilities_return.c
+SRC =	src/check_algorithm.c src/check_numbers.c src/ft_atoi_ps.c src/ft_split_functions.c \
+		src/general_operations.c src/operations_a.c src/operations_b.c src/operations_ab.c \
+		src/outward_algorithm.c src/push_swap.c src/return_algorithm.c src/sort_algorithm.c \
+		src/utilities_check_main.c src/utilities_list.c src/utilities_return.c
 OBJS = $(SRC:.c=.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
